@@ -1,8 +1,14 @@
-resource "aws_s3_bucket" "example" {
-  bucket = "example"
+provider "aws" {
+  region  = var.region
+  profile = "myprofile"
 }
 
-resource "aws_s3_access_point" "example" {
-  bucket = aws_s3_bucket.example.id
-  name   = "example"
+terraform {
+  backend "s3" {
+    encrypt = true
+    bucket  = "appname-terraform-state"
+    region  = "us-east-1"
+    key     = "terraform.tfstate"
+    profile = "myprofile"
+  }
 }
