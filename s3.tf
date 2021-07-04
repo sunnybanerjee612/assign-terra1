@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "b" {
-  bucket = "my-tf-test-bucket"
-  acl    = "private"
+resource "aws_s3_bucket" "example" {
+  bucket = "example"
+}
 
-  versioning {
-    enabled = true
-  }
+resource "aws_s3_access_point" "example" {
+  bucket = aws_s3_bucket.example.id
+  name   = "example"
 }
